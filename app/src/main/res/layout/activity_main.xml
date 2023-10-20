@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/createDatabaseButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Создать Базу" />
+
+    <Button
+        android:id="@+id/addRecordButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/createDatabaseButton"
+        android:layout_centerHorizontal="true"
+        android:text="Добавить запись" />
+
+    <Button
+        android:id="@+id/showRecordsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addRecordButton"
+        android:layout_centerHorizontal="true"
+        android:text="Показать все записи" />
+
+    <Button
+        android:id="@+id/deleteDatabaseButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/showRecordsButton"
+        android:layout_alignParentEnd="false"
+        android:layout_marginTop="48dp"
+        android:text="Удалить базу" />
+
+    <Button
+        android:id="@+id/deleteRecordButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/showRecordsButton"
+        android:layout_centerHorizontal="true"
+        android:text="Удалить запись" />
+    <LinearLayout
+        android:id="@+id/recordsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/showRecordsButton"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
