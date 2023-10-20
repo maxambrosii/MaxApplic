@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/showRecordsButton"
         android:layout_alignParentEnd="false"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="97dp"
         android:text="Удалить базу" />
 
     <Button
@@ -46,11 +46,20 @@
         android:layout_below="@id/showRecordsButton"
         android:layout_centerHorizontal="true"
         android:text="Удалить запись" />
+
+    <Button
+        android:id="@+id/editRecordButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/deleteRecordButton"
+        android:layout_marginTop="-1dp"
+        android:text="Изменить запись" />
+
     <LinearLayout
         android:id="@+id/recordsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_below="@id/showRecordsButton"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginTop="363dp"
+        android:orientation="vertical" />
 </RelativeLayout>

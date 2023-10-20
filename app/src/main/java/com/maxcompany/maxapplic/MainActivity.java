@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button createDatabaseButton, addRecordButton, showRecordsButton, deleteDatabaseButton, deleteRecordButton;
+    private Button createDatabaseButton, addRecordButton, showRecordsButton, deleteDatabaseButton, deleteRecordButton, editRecordButton;
     private SQLiteDatabase database;
     private LinearLayout recordsLayout;
 
@@ -32,6 +32,13 @@ public class MainActivity extends AppCompatActivity {
         deleteDatabaseButton = findViewById(R.id.deleteDatabaseButton);
         recordsLayout = findViewById(R.id.recordsLayout);
         deleteRecordButton = findViewById(R.id.deleteRecordButton);
+        editRecordButton = findViewById(R.id.editRecordButton);
+        editRecordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showEditRecordDialog();
+            }
+        });
         deleteRecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,6 +79,60 @@ public class MainActivity extends AppCompatActivity {
         if(isDatabaseCreated()){
             createDatabaseButton.setEnabled(false);
         }
+    }
+    private void showEditRecordDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Изменить запись");
+
+        final EditText idInput = new EditText(this);
+        idInput.setHint("ID студента");
+
+        final EditText nameInput = new EditText(this);
+        nameInput.setHint("Новое имя");
+
+        final EditText ageInput = new EditText(this);
+        ageInput.setHint("Новый возраст");
+
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.addView(idInput);
+        layout.addView(nameInput);
+        layout.addView(ageInput);
+
+        builder.setView(layout);
+
+        builder.setPositiveButton("Изменить", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String idStr = idInput.getText().toString();
+                String name = nameInput.getText().toString();
+                String ageStr = ageInput.getText().toString();
+
+                try {
+                    int id = Integer.parseInt(idStr);
+                    int age = Integer.parseInt(ageStr);
+                    if (editRecord(id, name, age)) {
+                        showMessage("Запись с ID " + id + " изменена.");
+                    } else {
+                        showMessage("Записи с ID " + id + " не существует.");
+                    }
+                } catch (NumberFormatException e) {
+                    showMessage("Введите корректные данные.");
+                }
+            }
+        });
+
+        builder.setNegativeButton("Отмена", null);
+        builder.show();
+    }
+
+    private boolean editRecord(int id, String name, int age) {
+        ContentValues values = new ContentValues();
+        values.put("name", name);
+        values.put("age", age);
+
+        int rowsAffected = database.update("student", values, "id=?", new String[]{String.valueOf(id)});
+        return rowsAffected > 0;
     }
 
     private void showDeleteRecordDialog() {
